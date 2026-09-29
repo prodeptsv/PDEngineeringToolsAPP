@@ -9,7 +9,7 @@ RUN npm ci
 # Copiar el código
 COPY . .
 
-# Aumentar límite de memoria para Node.js y compilar
+# Aumentar memoria para Node y compilar
 ENV NODE_OPTIONS="--max-old-space-size=4096"
 RUN npm run build
 
@@ -17,6 +17,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copiar los archivos compilados al directorio de Nginx
+# NOTA: Ajusta la ruta de origen si tu proyecto no usa la carpeta /browser
 COPY --from=build /app/dist/pd-engineering-tools/browser /usr/share/nginx/html
 
 # Copiar configuración de Nginx
