@@ -1,12 +1,12 @@
-# ETAPA 1: Construcción
-FROM node:20-alpine AS build
+# ETAPA 1: Construcción (Actualizado a Node.js 22)
+FROM node:22-alpine AS build
 WORKDIR /app
 
 # Copiar paquetes e instalar dependencias
 COPY package*.json ./
 RUN npm ci
 
-# Copiar el código
+# Copiar el código del proyecto
 COPY . .
 
 # Aumentar memoria para Node y compilar
@@ -17,7 +17,6 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copiar los archivos compilados al directorio de Nginx
-# NOTA: Ajusta la ruta de origen si tu proyecto no usa la carpeta /browser
 COPY --from=build /app/dist/pd-engineering-tools/browser /usr/share/nginx/html
 
 # Copiar configuración de Nginx
