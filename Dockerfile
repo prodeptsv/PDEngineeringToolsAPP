@@ -6,9 +6,12 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-# Copiar todo el código y construir
+# Copiar el código
 COPY . .
-RUN npm run build -- --configuration production
+
+# Aumentar límite de memoria para Node.js y compilar
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+RUN npm run build
 
 # ETAPA 2: Servidor Web Nginx
 FROM nginx:alpine
