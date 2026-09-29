@@ -1,0 +1,64 @@
+<div class="card bg-white border p-4 rounded-3 shadow-sm position-relative">
+  
+  <!-- Contenedor Carga / Error -->
+  <div *ngIf="isLoading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Loading report details...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Vista Principal del Reporte -->
+  <div *ngIf="!isLoading && !errorMessage && reportData.length > 0">
+    
+    <!-- Botón Exportar a Excel -->
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-success fw-bold d-flex align-items-center gap-2" (click)="exportToExcel()">
+        <i class="bi bi-file-earmark-excel"></i> Export to Excel
+      </button>
+    </div>
+
+    <!-- Encabezado de Impresión/Documento -->
+    <div class="text-center mb-4">
+      <h5 class="fw-bold m-0 text-uppercase">PRODEPT EL SALVADOR</h5>
+      <h6 class="fw-bold m-0 text-dark">Operation Analysis Report</h6>
+    </div>
+
+    <!-- Metadatos de Operación -->
+    <div class="mb-3 fs-6">
+      <div><strong>Name:</strong> {{ operationHeader?.Name }}</div>
+      <div><strong>Title:</strong> {{ operationHeader?.Title }}</div>
+    </div>
+
+    <!-- Tabla Estilizada Azul -->
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle report-table">
+        <thead>
+          <tr class="header-blue text-center">
+            <th style="width: 50px;">#</th>
+            <th style="width: 110px;">Code</th>
+            <th>Description</th>
+            <th style="width: 80px;">Freq</th>
+            <th style="width: 110px;">T.M.U</th>
+            <th style="width: 120px;">Machine Time</th>
+            <th style="width: 120px;">Manual Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of reportData; let i = index">
+            <td class="text-center fw-semibold">{{ item.Ordinal || (i + 1) }}</td>
+            <td class="text-center">{{ item.ItemId || item.Code || item.ElementCode || '' }}</td>
+            <td>{{ item.Description || item.ElementDescription || '' }}</td>
+            <td class="text-end">{{ (item.Freq ?? item.Frequency ?? 1.0) | number:'1.1-1' }}</td>
+            <td class="text-end">{{ (item.TMU ?? item.tmu ?? 0) | number:'1.4-4' }}</td>
+            <td class="text-end">{{ (item.MachineTime ?? item.machine_time ?? 0) | number:'1.4-4' }}</td>
+            <td class="text-end">{{ (item.ManualTime ?? item.manual_time ?? 0) | number:'1.4-4' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

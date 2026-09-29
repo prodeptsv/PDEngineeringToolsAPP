@@ -1,0 +1,106 @@
+/* Fondo oscuro general */
+.bg-dark-app {
+  background-color: #121212;
+}
+
+.bg-surface {
+  background-color: #1E1E1E !important;
+}
+
+/* Sidebar */
+.sidebar-menu {
+  width: 230px;
+  min-width: 230px;
+  display: flex;
+  flex-direction: column;
+
+  .active-category {
+    background-color: transparent;
+    color: #ffffff !important;
+  }
+
+  .active-link {
+    color: #43B3B7 !important; // Color turquesa de tu logo
+    font-weight: 500;
+  }
+}
+
+/* Botón Maestro de datos (Azul de tu borrador) */
+.btn-maestro {
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+/* Botón Generar (Basado en el color turquesa del logo) */
+.btn-generar {
+  background-color: #43B3B7;
+  border: none;
+  border-radius: 6px;
+  &:hover {
+    background-color: #35989B;
+  }
+}
+
+.form-select:focus {
+  border-color: #E24A3B; // Rojo coral de tu logo
+  box-shadow: 0 0 0 0.25rem rgba(226, 74, 59, 0.25);
+}
+
+// Color turquesa/aqua más oscuro para cabeceras de menú
+$aqua-dark: #2d8386; 
+$aqua-hover: #23686a;
+$aqua-primary: #43B3B7;
+
+// Botones de categorías principales (PROCESSES, REPORTS, MASTER DATA)
+.btn-aqua-header {
+  background-color: $aqua-dark !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: $aqua-hover !important;
+    color: #ffffff !important;
+  }
+}
+
+// Botón Generar
+.btn-aqua-primary {
+  background-color: $aqua-primary !important;
+  border: none !important;
+
+  &:hover:not(:disabled) {
+    background-color: darken($aqua-primary, 8%) !important;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+// Enlaces del submenú
+.sidebar-sublink {
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px 8px;
+  display: inline-block;
+
+  &:hover {
+    background-color: #e9ecef;
+  }
+}
+
+.active-sublink {
+  background-color: #e2f4f5;
+  color: $aqua-dark !important;
+  font-weight: 700 !important;
+}

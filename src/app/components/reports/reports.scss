@@ -1,0 +1,19 @@
+.report-table {
+  font-size: 0.88rem;
+
+  thead.header-blue th {
+    background-color: #9BC2E6 !important; // Color azul de la cabecera
+    color: #000000;
+    font-weight: 700;
+    border-color: #7fa8d1;
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-of-type(even) {
+    background-color: #f9fbfd;
+  }
+
+  td, th {
+    padding: 6px 10px;
+  }
+}
