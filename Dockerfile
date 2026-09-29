@@ -1,4 +1,4 @@
-# ETAPA 1: Construcción (Actualizado a Node.js 22)
+# ETAPA 1: Construcción
 FROM node:22-alpine AS build
 WORKDIR /app
 
@@ -17,7 +17,8 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copiar los archivos compilados al directorio de Nginx
-COPY --from=build /app/dist/pd-engineering-tools/browser /usr/share/nginx/html
+# NOTA: Se ajusta la ruta apuntando a la carpeta directa de dist
+COPY --from=build /app/dist/pd-engineering-tools-app/browser /usr/share/nginx/html
 
 # Copiar configuración de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
