@@ -18,7 +18,7 @@ FROM nginx:alpine
 
 # Copiar los archivos compilados al directorio de Nginx
 # NOTA: Se ajusta la ruta apuntando a la carpeta directa de dist
-COPY --from=build /app/dist/pd-engineering-tools-app/browser /usr/share/nginx/html
+COPY --from=build /app/dist/PDEngineeringToolsAPP/browser /usr/share/nginx/html
 
 # Copiar configuración de Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
