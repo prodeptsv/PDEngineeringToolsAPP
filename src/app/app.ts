@@ -31,6 +31,40 @@ export class AppComponent implements OnInit {
   openReports: boolean = false;
   openMasterData: boolean = false;
 
+  operationSearch = '';
+  showOperationSuggestions = false;
+
+  get filteredOperations(): OperationOption[] {
+    const query = this.operationSearch.trim().toLocaleLowerCase();
+
+    if (!query) return [];
+
+    return this.operationsList.filter((op) => {
+      const description =
+        op.Description || op.OperationName || op['description'] || '';
+
+      return String(description).toLocaleLowerCase().includes(query);
+    });
+  }
+
+  onSearchChange(value: string): void {
+    this.operationSearch = value;
+    this.selectedOperationId = null;
+    this.operationIdToPass = null;
+    this.showReport = false;
+    this.showOperationSuggestions = true;
+  }
+
+  selectOperation(op: OperationOption): void {
+    this.selectedOperationId =
+      op['operationid'] ?? op.OperationId ?? op.id;
+
+    this.operationSearch =
+      op.Description || op.OperationName || op['description'] || '';
+
+    this.showOperationSuggestions = false;
+  }
+
   constructor(private reportsService: ReportsService) {}
 
   ngOnInit(): void {
@@ -99,5 +133,6 @@ export class AppComponent implements OnInit {
     this.selectedOperationId = null;
     this.operationIdToPass = null;
     this.showReport = false;
+    this.operationSearch = '';
   }
 }

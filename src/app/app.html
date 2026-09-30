@@ -90,7 +90,9 @@
         <div class="card bg-white border mb-4 p-3 rounded-3 shadow-sm">
           <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
 
+            
             <!-- Dropdown List con [ngValue] para preservar números -->
+            <!--
             <div class="flex-grow-1" style="max-width: 450px;">
               
               <select class="form-select bg-white text-dark border" [(ngModel)]="selectedOperationId" [disabled]="isLoadingOperations">
@@ -102,6 +104,65 @@
                 </option>
               </select>
                           
+            </div>
+            -->
+
+            <div class="flex-grow-1 position-relative" style="max-width: 450px;">
+              <input
+                id="operationSearch"
+                name="operationSearch"
+                type="text"
+                class="form-control"
+                placeholder="Buscar operación..."
+                autocomplete="off"
+                [ngModel]="operationSearch"
+                (ngModelChange)="onSearchChange($event)"
+                (focus)="showOperationSuggestions = true"
+                [disabled]="isLoadingOperations"
+                role="combobox"
+                aria-autocomplete="list"
+                [attr.aria-expanded]="showOperationSuggestions"
+              />
+
+              <div
+                *ngIf="isLoadingOperations"
+                class="form-text"
+                role="status"
+                aria-live="polite"
+              >
+                Cargando operaciones...
+              </div>
+
+              <ul
+                *ngIf="!isLoadingOperations
+                  && showOperationSuggestions
+                  && operationSearch.trim()
+                  && filteredOperations.length"
+                class="list-group position-absolute w-100 shadow"
+                style="z-index: 1050; max-height: 280px; overflow-y: auto;"
+                role="listbox"
+              >
+                <li
+                  *ngFor="let op of filteredOperations"
+                  class="list-group-item list-group-item-action"
+                  role="option"
+                  (mousedown)="$event.preventDefault()"
+                  (click)="selectOperation(op)"
+                >
+                  {{ op.Description || op.OperationName || op['description'] }}
+                </li>
+              </ul>
+
+              <div
+                *ngIf="!isLoadingOperations
+                  && showOperationSuggestions
+                  && operationSearch.trim()
+                  && filteredOperations.length === 0"
+                class="list-group position-absolute w-100 shadow"
+                style="z-index: 1050;"
+              >
+                <div class="list-group-item text-muted">No se encontraron coincidencias</div>
+              </div>
             </div>
 
             <!-- Grupo de Botones -->
