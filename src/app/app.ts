@@ -82,15 +82,17 @@ export class AppComponent implements OnInit {
     if (this.selectedOperationId === null || this.selectedOperationId === undefined) return;
 
     const numericId = Number(this.selectedOperationId);
-    if (isNaN(numericId)) return;
+    //if (isNaN(numericId)) return;
+    if (Number.isNaN(numericId)) return;
 
     // Reiniciamos showReport para forzar la recreación del componente
-    this.showReport = false;
+    //this.showReport = false;
     this.operationIdToPass = numericId;
+    this.showReport = true;
 
-    setTimeout(() => {
-      this.showReport = true;
-    }, 0);
+    //setTimeout(() => {
+    //  this.showReport = true;
+    //}, 0);
   }
 
   clearSelection(): void {

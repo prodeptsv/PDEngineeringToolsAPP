@@ -92,6 +92,7 @@
 
             <!-- Dropdown List con [ngValue] para preservar números -->
             <div class="flex-grow-1" style="max-width: 450px;">
+              
               <select class="form-select bg-white text-dark border" [(ngModel)]="selectedOperationId" [disabled]="isLoadingOperations">
                 <option [ngValue]="null" disabled selected>
                   {{ isLoadingOperations ? 'Loading operations...' : 'Operations' }}
@@ -100,6 +101,7 @@
                   {{ op.Description || op.OperationName || op['description'] }}
                 </option>
               </select>
+                          
             </div>
 
             <!-- Grupo de Botones -->
